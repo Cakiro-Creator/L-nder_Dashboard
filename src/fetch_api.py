@@ -34,6 +34,17 @@ def get_countries():
         region = c.get("region", {}).get("value", "")
         if region == "Aggregates":
             continue
+        # Souveraen-Flag (heuristisch)
+        income_level = c.get("incomeLevel", {}).get("value", "")
+        capital = str(c.get("capitalCity", "")).strip()
+        lat = str(c.get("latitude", "")).strip()
+        lon = str(c.get("longitude", "")).strip()
+        is_sovereign = (
+            income_level != "Not classified"
+            and bool(capital)
+            and bool(lat)
+            and bool(lon)
+        )
         iso2 = c.get("iso2Code")
         if not iso2:
             continue
@@ -42,7 +53,8 @@ def get_countries():
             "iso3": c.get("id"),
             "name": c.get("name"),
             "region": region,
-            "income_level": c.get("incomeLevel", {}).get("value", ""),
+            "income_level": income_level,
+            "is_sovereign": is_sovereign,
         }
     return countries
 def _normalize_record(r, countries):
@@ -55,6 +67,7 @@ def _normalize_record(r, countries):
         "country_name": country.get("value"),
         "region": countries[iso2]["region"],
         "income_level": countries[iso2]["income_level"],
+        "is_sovereign": countries[iso2]["is_sovereign"],
         "indicator_code": r.get("indicator", {}).get("id"),
         "indicator_name": r.get("indicator", {}).get("value"),
         "year": r.get("date"),

@@ -4,11 +4,11 @@ from pathlib import Path
 from datetime import datetime
 BASE_URL = "https://api.worldbank.org/v2"
 END_YEAR = datetime.now().year - 1
-START_YEAR = END_YEAR - 4
+START_YEAR = 2000
 INDICATORS = {
     "SP.POP.TOTL": "Population",
     "NY.GDP.MKTP.CD": "GDP (current US$)",
-    "SP.DYN.LE00.IN": "Life expectancy (years)",
+    "SL.UEM.TOTL.ZS": "Unemployment, total (% of total labor force)",
 }
 SLEEP_SEC = 0.1
 ROOT = Path(__file__).resolve().parents[1]
