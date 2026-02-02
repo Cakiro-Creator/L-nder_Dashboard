@@ -1,10 +1,14 @@
 # Projekt Bank API (World Bank)
 
-Kurz und simpel:
+Dieses Projekt zeigt eine durchgaengige Datenpipeline mit der World-Bank-API:
+API-Abruf, Cleaning, Plausibilitaetschecks, Feature-Bildung, SQL-Normalisierung
+und Visualisierung inklusive Streamlit-Dashboard.
+
+## Features
 - Live API Abruf (World Bank)
-- Cleaning + Checks + kleine Features
+- Cleaning + Checks + einfache Features
 - Normalisierte SQL Tabellen (SQLite)
-- Mehrere Plots als Report
+- Mehrere Plots als Report (Bevoelkerung, BIP, BIP pro Kopf)
 - Dashboard (Streamlit)
 
 ## Bewerbungs-Text (kurz)
@@ -14,12 +18,11 @@ Das Dashboard ermoeglicht interaktive Filter, Vergleich von Laendern und
 eine schnelle Explorations-Analyse.
 
 ## Schnellstart
-1) Pakete installieren
-   - `pip install -r requirements.txt`
-2) Alles in einem Schritt
-   - `python run_all.py`
-3) Dashboard lokal starten
-   - `streamlit run app.py`
+```bash
+pip install -r requirements.txt
+python run_all.py
+streamlit run app.py
+```
 
 ## Datenfluss
 - API -> `data/raw/worldbank_raw.csv`
@@ -27,6 +30,9 @@ eine schnelle Explorations-Analyse.
 - SQLite -> `data/processed/worldbank.db`
 - Plots -> `reports/figures/`
 - Dashboard -> `app.py`
+
+## Zeitraum
+- Standardmaessig `START_YEAR = 2000` bis `END_YEAR = aktuelles Jahr - 1`
 
 ## Online Deployment (Streamlit Cloud)
 1) Projekt nach GitHub pushen
@@ -39,3 +45,10 @@ eine schnelle Explorations-Analyse.
 - `sql/`        SQL Schema
 - `data/`       raw, processed, sample
 - `reports/`    Plots
+
+## Hinweise
+- Rohdaten und abgeleitete Daten sind reproduzierbar und werden per `.gitignore` ausgeschlossen.
+- Keine sensiblen Daten enthalten (nur oeffentliche API).
+
+## Lizenz
+Siehe `LICENSE`.

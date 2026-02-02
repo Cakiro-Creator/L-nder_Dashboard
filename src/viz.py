@@ -82,30 +82,6 @@ def plot_population_change_bottom10(df, out_path):
     return True
 
 
-def plot_gdp_vs_life_expectancy(df, out_path):
-    # GDP vs Lebenserwartung (letztes Jahr)
-    last_year = int(df["year"].max())
-    gdp = df[
-        (df["indicator_code"] == "NY.GDP.MKTP.CD") & (df["year"] == last_year)
-    ][["country_code", "country_name", "value"]].rename(columns={"value": "gdp"})
-    life = df[
-        (df["indicator_code"] == "SP.DYN.LE00.IN") & (df["year"] == last_year)
-    ][["country_code", "value"]].rename(columns={"value": "life"})
-    merged = gdp.merge(life, on="country_code")
-    if merged.empty:
-        return False
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.scatter(merged["gdp"], merged["life"], alpha=0.7)
-    ax.set_title(f"BIP vs Lebenserwartung ({last_year})")
-    ax.set_xlabel("BIP (aktuelle US$)")
-    ax.set_ylabel("Lebenserwartung (Jahre)")
-    ax.set_xscale("log")
-    ax.grid(axis="both", linestyle="--", alpha=0.4)
-    plt.tight_layout()
-    fig.savefig(out_path, dpi=150)
-    return True
-
-
 def plot_top_gdp_per_capita(df, out_path):
     # Top 10 GDP pro Kopf (berechnet) im letzten Jahr
     last_year = int(df["year"].max())

@@ -47,7 +47,6 @@ indicators = (
     .drop_duplicates()
     .sort_values("indicator_name")
 )
-indicators = indicators[indicators["indicator_code"] != "SP.DYN.LE00.IN"]
 indicator_de = {
     "SP.POP.TOTL": "Bevoelkerung",
     "NY.GDP.MKTP.CD": "BIP (aktuelle US$)",
